@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "Iori Mizutani, Tokyo, Japan", :name => "author"}/
+    %link{:href => "vendor/animate.css/animate.css", :rel => "stylesheet"}/
+    / Local CSS
+    %link{:href => "css/main.css", :rel => "stylesheet"}/
+    / Load JavaScript Libraries
+    %script{:src => "vendor/jquery/dist/jquery.min.js"}
+    / Local JavaScript
+    %script{:src => "js/mqtt-visualizer.js"}
+    %title= @title
+  %body
+    != yield

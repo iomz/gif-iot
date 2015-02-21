@@ -1,0 +1,15 @@
+*.tmp
+*~
+*#*
+*.swp
+*.ico
+*.bak
+*.yml
+*.sqlite3
+.bundle
+public/image/*
+test
+tmp
+vendor
+driver.rb
+
