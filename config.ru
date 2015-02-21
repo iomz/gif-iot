@@ -1,4 +1,4 @@
-require 'mqtt-visualizer'
+require 'mqtt_visualizer'
 
 # ActiveRecord debug message
 ActiveRecord::Base::logger.level = 1
@@ -12,6 +12,8 @@ ActiveRecord::Base.default_timezone = :local
 
 #$stdout.sync = true #if development?
 #\ -s puma -E production
+
+MQTTVisualizer.start_subscribe()
 
 use MQTTVisualizer::WebsocketHandler
 run MQTTVisualizer::App

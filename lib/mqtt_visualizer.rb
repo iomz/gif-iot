@@ -15,8 +15,9 @@
 %w(
   active_node
   core
+  subscriber
   websocket_handler
-).each { |name| require_dependency File.expand_path("../mqtt-visualizer/#{name}", __FILE__) }
+).each { |name| require_dependency File.expand_path("../mqtt_visualizer/#{name}", __FILE__) }
 
 module MQTTVisualizer
   class App < Sinatra::Base
@@ -28,7 +29,7 @@ module MQTTVisualizer
       @title = MQTTVisualizer.config[:title]
       @nodes = []
       ActiveNode.all.each do |m|
-        @node << m
+        @nodes << m
       end
       haml :index
     end
