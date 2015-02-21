@@ -11,7 +11,6 @@ module MQTTVisualizer
               data = JSON.parse(message)
               ip = data["ip"]
               mac = data["mac"]
-              p [ip, mac]
               if ActiveNode.where(:mac => mac).empty?
                 ActiveNode.create(:mac => mac, :ip => ip)
               else
@@ -19,7 +18,6 @@ module MQTTVisualizer
               end
             when 'data'
               mac = topics[2]
-              #p mac
               unless ActiveNode.where(:mac => mac).empty?
                 p mac
                 ActiveNode.find_by_mac(mac).touch()
