@@ -22,6 +22,7 @@ module MQTTVisualizer
                 node_hash = node.serializable_hash(:except => 'created_at')
               else
                 node = node.take
+                node.touch();
                 node.update(ip: ip, sensor_mac: sensor_mac)
                 node_hash = node.serializable_hash(:only => ['id', 'ip', 'sensor_mac', 'updated_at'])
               end

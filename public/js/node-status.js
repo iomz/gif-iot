@@ -65,7 +65,7 @@ $(document).ready(function(e) {
     ws.onmessage = function(msg) {
         var data = JSON.parse(msg.data);
         if (data.topic == "node") {
-            console.log(data.node);
+            //console.log(data.node);
             animateUpdate(data.node);
         }
     };
