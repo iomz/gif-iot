@@ -1,4 +1,17 @@
 #node
-  - @nodes.each do |m| 
-    %p #{m.id} #{m.ip} #{m.mac}
+  %h1 GIF2015 workshop cheet table
+  %table.responstable
+    %tr
+      %th ID
+      %th OpenBlocks MAC address
+      %th SensorTag MAC address
+      %th IP address
+      %th Last Updated
+    - @nodes.each do |m| 
+      %tr
+        %td #{m.id}
+        %td #{m.device_mac}
+        %td #{m.sensor_mac}
+        %td #{m.ip}
+        %td #{m.updated_at}
 

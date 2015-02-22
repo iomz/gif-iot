@@ -10,17 +10,17 @@ module MQTTVisualizer
             when 'ip'
               data = JSON.parse(message)
               ip = data["ip"]
-              mac = data["mac"]
-              if ActiveNode.where(:mac => mac).empty?
-                ActiveNode.create(:mac => mac, :ip => ip)
+              device_mac = data["deviceMac"]
+              sensor_mac = data["sensorMac"]
+              if ActiveNode.where(:device_mac => device_mac).empty?
+                ActiveNode.create(:device_mac => device_mac, :ip => ip, :sensor_mac => sensor_mac)
               else
-                ActiveNode.find_by_mac(mac).update(ip: ip)
+                ActiveNode.find_by_device_mac(device_mac).update(ip: ip, sensor_mac: sensor_mac)
               end
             when 'data'
-              mac = topics[2]
-              unless ActiveNode.where(:mac => mac).empty?
-                p mac
-                ActiveNode.find_by_mac(mac).touch()
+              sensor_mac = topics[2]
+              unless ActiveNode.where(:sensor_mac => sensor_mac).empty?
+                ActiveNode.find_by_sensor_mac(sensor_mac).touch()
               end
             else
               puts "#{topic}: #{message}"

@@ -1,5 +1,4 @@
 var ws = new WebSocket(location.href.replace(/^http/, 'ws'));
-}
 
 /* Update the screen when node status changed */
 var animateUpdate = function(id, nodeStatus) {

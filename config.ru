@@ -13,8 +13,10 @@ ActiveRecord::Base.default_timezone = :local
 #$stdout.sync = true #if development?
 #\ -s puma -E production
 
-MQTTVisualizer.start_subscribe()
+Sass::Plugin.options[:style] = :compressed
+use Sass::Plugin::Rack
 
+MQTTVisualizer.start_subscribe()
 use MQTTVisualizer::WebsocketHandler
 run MQTTVisualizer::App
 

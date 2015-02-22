@@ -14,7 +14,8 @@
 ActiveRecord::Schema.define(version: 20150221195840) do
 
   create_table "active_nodes", force: :cascade do |t|
-    t.string   "mac"
+    t.string   "device_mac"
+    t.string   "sensor_mac"
     t.string   "ip"
     t.datetime "created_at"
     t.datetime "updated_at"

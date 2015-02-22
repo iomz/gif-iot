@@ -6,6 +6,7 @@
   open-uri
   mqtt
   puma
+  sass/plugin/rack
   sinatra/activerecord
   sinatra/base
   time
