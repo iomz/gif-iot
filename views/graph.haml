@@ -3,6 +3,8 @@
 %script{:src => "/vendor/highcharts-release/modules/exporting.js"}
 %script{:src => "/vendor/highcharts-release/themes/dark-unica.js"}
 %script{:src => "/js/graph.js"}
+%script
+  var id = "#{@id}";
 %body{:style => "margin: 0px;"}
   #resizer{:style => "min-width: 350px;"}
     #inner-resizer

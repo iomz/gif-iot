@@ -28,7 +28,7 @@ $(function() {
                 }
             },
             title: {
-                text: "Live data from OpenBlocks"
+                text: "Live data from OpenBlocks: " + id
             },
             xAxis: {
                 type: "datetime"

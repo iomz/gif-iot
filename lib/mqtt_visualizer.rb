@@ -36,7 +36,8 @@ module MQTTVisualizer
     end
 
     get '/graph/:id' do
-      @title = MQTTVisualizer.config[:title] + " Graph: " +:id.to_s
+      @id = "#{params[:id]}"
+      @title = MQTTVisualizer.config[:title] + " Graph: " + @id
       haml :graph
     end
 
