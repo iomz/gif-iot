@@ -1,23 +1,25 @@
 %link{:href => "/stylesheets/responstable.css", :rel => "stylesheet", :type => 'text/css'}/
 %link{:href => "/stylesheets/styles.css", :rel => "stylesheet", :type => 'text/css'}/
-%script{:src => "/js/mqtt-visualizer.js"}
+%script{:src => "/js/date.format.js"}
+%script{:src => "/js/node-status.js"}
 %body
   #node
     %h1 GIF2015 workshop cheat table
-    %table.responstable
-      %tr
-        %th ID
-        %th OpenBlocks MAC address
-        %th SensorTag MAC address
-        %th IP address
-        %th Last Updated
-        %th Status
-      - @nodes.each do |m| 
+    %table#nodeTable.responstable
+      %tbody
         %tr
-          %td #{m.id}
-          %td #{m.device_mac}
-          %td #{m.sensor_mac}
-          %td #{m.ip}
-          %td #{m.updated_at}
-          %td N/A
+          %th ID
+          %th OpenBlocks MAC address
+          %th SensorTag MAC address
+          %th IP address
+          %th Last Updated
+          %th Status
+        - @nodes.each do |m| 
+          %tr{:id => "device-#{m.id}"}
+            %td.animated.id #{m.id}
+            %td.animated.device_mac #{m.device_mac}
+            %td.animated.sensor_mac #{m.sensor_mac}
+            %td.animated.ip #{m.ip}
+            %td.animated.updated_at #{m.updated_at}
+            %td.animated.status N/A
 

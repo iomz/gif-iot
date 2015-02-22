@@ -22,6 +22,7 @@ $(function() {
                             // current time
                             for (var i in series) {
                                 series[i].addPoint([ x, Math.random() ], true, true);
+                                series[i].update({name: hoge});
                             }
                         }, 1e3);
                     }

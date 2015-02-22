@@ -4,11 +4,17 @@ module MQTTVisualizer
 
     def initialize(app)
       @app = app
-      @clients = []
+      @@clients = []
     end
 
     def self.parse_event_data(data)
       return data
+    end
+
+    def self.broadcast(msg)
+       @@clients.each do |client|
+         client.send(msg.to_json)
+       end
     end
 
     def call(env)
@@ -17,10 +23,10 @@ module MQTTVisualizer
 
         ws.on(:open) do |event|
           p [:open, ws.object_id]
-          @clients << ws
+          @@clients << ws
           ws.send({ you: ws.object_id }.to_json)
-          @clients.each do |client|
-            client.send({ count: @clients.size }.to_json)
+          @@clients.each do |client|
+            client.send({ count: @@clients.size }.to_json)
           end
         end
 
@@ -31,7 +37,7 @@ module MQTTVisualizer
           action_name = data['action_name']
           action = MQTTVisualizer.config.key(action_name)
           unless CurrentMember.where(:user => user).empty?
-            @clients.each{ |wss| wss.send({ id: user, action_name: action_name }.to_json) }
+            @@clients.each{ |wss| wss.send({ id: user, action_name: action_name }.to_json) }
             StatusLog.create(:user => user, :action => action)
             CurrentMember.find_by_user(user).update(status: action)
             MQTTVisualizer.post_update({:user => user, :action => action})
@@ -41,9 +47,9 @@ module MQTTVisualizer
 
         ws.on(:close) do |event|
           p [:close, ws.object_id, event.code]
-          @clients.delete(ws)
-          @clients.each do |client|
-            client.send({ count: @clients.size }.to_json)
+          @@clients.delete(ws)
+          @@clients.each do |client|
+            client.send({ count: @@clients.size }.to_json)
           end
           ws = nil
         end
