@@ -18,7 +18,8 @@
           %tr{:id => "device-#{m.id}"}
             %td.animated.id #{m.id}
             %td.animated.device_mac #{m.device_mac}
-            %td.animated.sensor_mac #{m.sensor_mac}
+            %td.animated.sensor_mac
+              %a{:href => "https://quickstart.internetofthings.ibmcloud.com/#/device/#{m.sensor_mac.gsub(/:/, '').downcase}/sensor/", :target => "_blank"} #{m.sensor_mac}
             %td.animated.ip #{m.ip}
             %td.animated.updated_at #{m.updated_at}
             %td.status.down down

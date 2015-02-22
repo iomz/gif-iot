@@ -26,6 +26,11 @@ h1 {
     background-color: #800000;
 }
 
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}
+
 #nodeTable td {
     text-align:center; 
     vertical-align:middle;

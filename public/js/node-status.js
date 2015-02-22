@@ -13,8 +13,16 @@ var getAttribute = function(i, node) {
 
 var changeNodeStatus = function(id, nodeStatus) {
     var prop = $("#device-" + id + " td.status");
-    prop.html(nodeStatus);
-    prop.removeClass().addClass("status " + nodeStatus);
+    if( prop.html() != nodeStatus ) {
+        prop.html(nodeStatus);
+        prop.removeClass().addClass("status " + nodeStatus);
+    }
+    var prop = $("#device-" + id + " td.sensor_mac a");
+    if( nodeStatus == "active" ) {
+        prop.removeClass("not-active");
+    } else {
+        prop.addClass("not-active");
+    }
 };
 
 /* update the screen when node status changed */
@@ -36,10 +44,18 @@ var animateUpdate = function(node) {
         } else if (i != "status") {
             var attr = getAttribute(i, node);
             var prop = $("#device-" + id + " td." + i);
-            prop.addClass("fadeOut");
-            prop.html(attr);
-            prop.addClass("fadeIn");
-            prop.removeClass("fadeOut fadeIn");
+            if (prop.html() != attr && prop.children().html() != attr) {
+                prop.addClass("fadeOut");
+                if (i == "sensor_mac") {
+                    var mac = attr.replace(/:/g, "").toLowerCase();
+                    prop.children().html(attr);
+                    prop.children().attr("href", "https://quickstart.internetofthings.ibmcloud.com/#/device/" + mac + "/sensor/");
+                } else {
+                    prop.html(attr);
+                }
+                prop.addClass("fadeIn");
+                prop.removeClass("fadeOut fadeIn");
+            }
         }
     }
     // update the node status
@@ -48,7 +64,6 @@ var animateUpdate = function(node) {
           case "down":
             changeNodeStatus(node["id"], "down");
             break;
-
           case "pending":
             changeNodeStatus(node["id"], "pending");
             break;
@@ -65,7 +80,7 @@ $(document).ready(function(e) {
     ws.onmessage = function(msg) {
         var data = JSON.parse(msg.data);
         if (data.topic == "node") {
-            //console.log(data.node);
+            console.log(data.node);
             animateUpdate(data.node);
         }
     };

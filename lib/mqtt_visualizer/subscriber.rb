@@ -32,7 +32,8 @@ module MQTTVisualizer
                 WebsocketHandler.broadcast({ topic: 'node', node: node_hash })
               end
             when 'data'
-              sensor_mac = topics[2]
+              data = JSON.parse(message)
+              device_mac = data["deviceMac"]
               node = ActiveNode.where(:device_mac => device_mac)
               if node.any?
                 node = node.take
