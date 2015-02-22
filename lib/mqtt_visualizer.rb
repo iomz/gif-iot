@@ -34,6 +34,12 @@ module MQTTVisualizer
       end
       haml :index
     end
+
+    get '/graph/:id' do
+      @title = MQTTVisualizer.config[:title] + " Graph: " +:id.to_s
+      haml :graph
+    end
+
   end
 end
 

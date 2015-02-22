@@ -3,13 +3,8 @@
   %head
     %meta{:charset => "utf-8"}/
     %meta{:content => "Iori Mizutani, Tokyo, Japan", :name => "author"}/
-    %link{:href => "vendor/animate.css/animate.css", :rel => "stylesheet"}/
-    / Local CSS
-    %link{:href => "stylesheets/responstable.css", :rel => "stylesheet", :type => 'text/css'}/
-    / Load JavaScript Libraries
-    %script{:src => "vendor/jquery/dist/jquery.min.js"}
-    / Local JavaScript
-    %script{:src => "js/mqtt-visualizer.js"}
+    %link{:href => "/vendor/animate.css/animate.css", :rel => "stylesheet"}/
+    %script{:src => "/vendor/jquery/dist/jquery.min.js"}
     %title= @title
-  %body
-    != yield
+  != yield
+    
