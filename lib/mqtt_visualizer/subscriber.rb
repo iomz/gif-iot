@@ -33,7 +33,7 @@ module MQTTVisualizer
               end
             when 'data'
               sensor_mac = topics[2]
-              node = ActiveNode.where(:sensor_mac => sensor_mac)
+              node = ActiveNode.where(:device_mac => device_mac)
               if node.any?
                 node = node.take
                 node.touch()
