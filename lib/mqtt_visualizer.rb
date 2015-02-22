@@ -41,6 +41,14 @@ module MQTTVisualizer
       haml :graph
     end
 
+    get '/ip/openblocks/:id' do
+      begin
+        ip = ActiveNode.find(params[:id]).ip
+      rescue ActiveRecord::RecordNotFound
+        ip = '?'
+      end
+      ip
+    end
   end
 end
 
