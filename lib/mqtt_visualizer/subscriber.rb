@@ -12,6 +12,7 @@ module MQTTVisualizer
               ip = data["ip"]
               device_mac = data["deviceMac"]
               sensor_mac = data["sensorMac"]
+              status = data["nodeStatus"]
               #ActiveNode.find_or_create_by(:device_mac => device_mac, :ip => ip, :sensor_mac => sensor_mac)
               node = ActiveNode.where(:device_mac => device_mac)
               if node.blank?
@@ -25,6 +26,10 @@ module MQTTVisualizer
                 node_hash = node.serializable_hash(:only => ['id', 'ip', 'sensor_mac', 'updated_at'])
               end
               WebsocketHandler.broadcast({ topic: 'node', node: node_hash })
+              if !status.nil?
+                node_hash = {id: node.id, status: status}
+                WebsocketHandler.broadcast({ topic: 'node', node: node_hash })
+              end
             when 'data'
               sensor_mac = topics[2]
               node = ActiveNode.where(:sensor_mac => sensor_mac)
