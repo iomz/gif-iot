@@ -28,6 +28,7 @@ var changeNodeStatus = function(id, nodeStatus) {
 /* update the screen when node status changed */
 var animateUpdate = function(node) {
     // add a node
+    /* check if specified id exist in the table instead of getting device_mac
     if (node.hasOwnProperty("device_mac")) {
         $("#nodeTable > tbody").append($('<tr id="device-' + node["id"] + '">'));
         var tr = $("#nodeTable > tbody > tr:last");
@@ -37,28 +38,8 @@ var animateUpdate = function(node) {
         }
         tr.append($("<td>").addClass("animated status").html("N/A"));
     }
-    // update the node attr
-    for (var i in node) {
-        if (i == "id") {
-            var id = node[i];
-        } else if (i != "status") {
-            var attr = getAttribute(i, node);
-            var prop = $("#device-" + id + " td." + i);
-            if (prop.html() != attr && prop.children().html() != attr) {
-                prop.addClass("fadeOut");
-                if (i == "sensor_mac") {
-                    var mac = attr.replace(/:/g, "").toLowerCase();
-                    prop.children().html(attr);
-                    prop.children().attr("href", "https://quickstart.internetofthings.ibmcloud.com/#/device/" + mac + "/sensor/");
-                } else {
-                    prop.html(attr);
-                }
-                prop.addClass("fadeIn");
-                prop.removeClass("fadeOut fadeIn");
-            }
-        }
-    }
-    // update the node status
+    */
+    // update the node status and info
     if (node.hasOwnProperty("status")) {
         switch (node["status"]) {
           case "down":
@@ -67,6 +48,31 @@ var animateUpdate = function(node) {
           case "pending":
             changeNodeStatus(node["id"], "pending");
             break;
+          case "initialized":
+            changeNodeStatus(node["id"], "initialized");
+            break;
+        }
+    } else if (node.hasOwnProperty("device_mac")) {
+        // update the node attr
+        for (var i in node) {
+            if (i == "id") {
+                var id = node[i];
+            } else {
+                var attr = getAttribute(i, node);
+                var prop = $("#device-" + id + " td." + i);
+                if (prop.html() != attr) {
+                    prop.addClass("fadeOut");
+                    if (i == "sensor_mac") {
+                        var mac = attr.replace(/:/g, "").toLowerCase();
+                        prop.children().html(attr);
+                        prop.children().attr("href", "https://quickstart.internetofthings.ibmcloud.com/#/device/" + mac + "/sensor/");
+                    } else {
+                        prop.html(attr);
+                    }
+                    prop.addClass("fadeIn");
+                    prop.removeClass("fadeOut fadeIn");
+                }
+            }
         }
     } else {
         changeNodeStatus(node["id"], "active");

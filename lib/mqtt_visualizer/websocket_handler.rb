@@ -12,9 +12,9 @@ module MQTTVisualizer
     end
 
     def self.broadcast(msg)
-       @@clients.each do |client|
-         client.send(msg.to_json)
-       end
+      @@clients.each do |client|
+        client.send(msg.to_json)
+      end
     end
 
     def call(env)
