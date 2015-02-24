@@ -2,6 +2,7 @@
   addressable/uri
   faye/websocket
   haml
+  influxdb
   json
   open-uri
   mqtt
@@ -18,6 +19,7 @@
   core
   subscriber
   websocket_handler
+  influxdb_client
 ).each { |name| require_dependency File.expand_path("../gif-iot/#{name}", __FILE__) }
 
 module GIFIoT

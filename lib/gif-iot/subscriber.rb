@@ -42,6 +42,8 @@ module GIFIoT
                 node_hash = node.serializable_hash(:only => ['id', 'updated_at'])
                 WebsocketHandler.broadcast({ topic: 'node', node: node_hash })
               end
+              data.delete("ip").delete("sensorMac").delete("deviceMac")
+              InfluxdbClient.ingest(topics[2], data)
             else
               puts "#{topic}: #{message}"
             end

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Iori Mizutani"]
   spec.email         = ["iori.mizutani@gmail.com"]
   spec.homepage      = "https://github.com/iomz/gif-iot"
-  spec.summary       = %q{mqtt-feed visualizer}
+  spec.summary       = %q{mqtt-feed visualizer and influxdb ingester}
   spec.description   = %q{dynamic visualization for mqtt feed data}
   spec.license       = "MIT"
 
@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "addressable"
   spec.add_dependency "faye-websocket"
   spec.add_dependency "haml"
+  spec.add_dependency "influxdb"
   spec.add_dependency "json"
   spec.add_dependency "mqtt"
   spec.add_dependency "puma"

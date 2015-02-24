@@ -1,4 +1,4 @@
-require 'gif-iot'
+require 'app'
 
 # ActiveRecord debug message
 ActiveRecord::Base::logger.level = 1
@@ -18,5 +18,6 @@ use Sass::Plugin::Rack
 
 GIFIoT.start_subscribe()
 use GIFIoT::WebsocketHandler
+use GIFIoT::InfluxdbClient
 run GIFIoT::App
 
