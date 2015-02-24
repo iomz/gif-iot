@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mqtt-visualizer (0.0.1)
+    gif-iot (0.0.1)
       addressable
       faye-websocket
       haml
@@ -90,6 +90,6 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.7)
   foreman
-  mqtt-visualizer!
+  gif-iot!
   rake (~> 10.0)
   rspec (~> 3.2.0)

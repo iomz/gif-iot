@@ -18,16 +18,16 @@
   core
   subscriber
   websocket_handler
-).each { |name| require_dependency File.expand_path("../mqtt_visualizer/#{name}", __FILE__) }
+).each { |name| require_dependency File.expand_path("../gif-iot/#{name}", __FILE__) }
 
-module MQTTVisualizer
+module GIFIoT
   class App < Sinatra::Base
     register Sinatra::ActiveRecordExtension
-    set :database, MQTTVisualizer.config[:database]
+    set :database, GIFIoT.config[:database]
     set :root, File.expand_path("../../", __FILE__)
 
     get '/' do
-      @title = MQTTVisualizer.config[:title]
+      @title = GIFIoT.config[:title]
       @nodes = []
       ActiveNode.all.each do |m|
         @nodes << m
@@ -37,7 +37,7 @@ module MQTTVisualizer
 
     get '/graph/:id' do
       @id = "#{params[:id]}"
-      @title = MQTTVisualizer.config[:title] + " Graph: " + @id
+      @title = GIFIoT.config[:title] + " Graph: " + @id
       haml :graph
     end
 

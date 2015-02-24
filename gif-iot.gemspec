@@ -1,14 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mqtt_visualizer/version'
+require 'gif-iot/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "mqtt-visualizer"
-  spec.version       = MQTTVisualizer::VERSION
+  spec.name          = "gif-iot"
+  spec.version       = GIFIoT::VERSION
   spec.authors       = ["Iori Mizutani"]
   spec.email         = ["iori.mizutani@gmail.com"]
-  spec.homepage      = "https://github.com/iomz/mqtt-visualizer"
+  spec.homepage      = "https://github.com/iomz/gif-iot"
   spec.summary       = %q{mqtt-feed visualizer}
   spec.description   = %q{dynamic visualization for mqtt feed data}
   spec.license       = "MIT"

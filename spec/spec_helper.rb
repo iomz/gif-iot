@@ -5,7 +5,7 @@ require 'bundler'
 Bundler.require
 
 $: << File.expand_path('../../lib', __FILE__)
-require 'mqtt-visualizer'
+require 'gif-iot'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

@@ -1,4 +1,4 @@
-module MQTTVisualizer
+module GIFIoT
   class ActiveNode < ActiveRecord::Base
     validates_presence_of :device_mac
   end

@@ -1,9 +1,9 @@
-module MQTTVisualizer
+module GIFIoT
   module Subscriber
     def start_subscribe()
       puts "* Starting to subscribe"
       t = Thread.new do
-        MQTT::Client.connect(MQTTVisualizer.config[:host]) do |c|
+        MQTT::Client.connect(GIFIoT.config[:mqtt_broker]) do |c|
           c.get('gif-iot/#') do |topic,message|
             topics = topic.split('/')
             case topics[1]
@@ -53,7 +53,7 @@ module MQTTVisualizer
 
     def checker_timer()
       t = Thread.new do
-        interval = MQTTVisualizer.config[:interval] #seconds
+        interval = GIFIoT.config[:interval] #seconds
         loop do
           now = DateTime.now.to_time.to_i
           sleep interval - (now%interval)

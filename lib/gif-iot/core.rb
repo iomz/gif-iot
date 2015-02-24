@@ -1,4 +1,4 @@
-module MQTTVisualizer
+module GIFIoT
   module Core
     def config
       @config ||= {}
@@ -10,6 +10,6 @@ module MQTTVisualizer
   end
 
   extend Core
-  MQTTVisualizer.load_config
+  GIFIoT.load_config
 end
 

@@ -1,4 +1,4 @@
-require 'mqtt_visualizer'
+require 'gif-iot'
 
 # ActiveRecord debug message
 ActiveRecord::Base::logger.level = 1
@@ -16,7 +16,7 @@ ActiveRecord::Base.default_timezone = :local
 Sass::Plugin.options[:style] = :compressed
 use Sass::Plugin::Rack
 
-MQTTVisualizer.start_subscribe()
-use MQTTVisualizer::WebsocketHandler
-run MQTTVisualizer::App
+GIFIoT.start_subscribe()
+use GIFIoT::WebsocketHandler
+run GIFIoT::App
 

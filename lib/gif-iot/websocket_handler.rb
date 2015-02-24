@@ -1,4 +1,4 @@
-module MQTTVisualizer
+module GIFIoT
   class WebsocketHandler
     KEEPALIVE_TIME = 15.freeze
 
@@ -35,13 +35,13 @@ module MQTTVisualizer
           data = JSON.parse(event.data)
           user = data['user']
           action_name = data['action_name']
-          action = MQTTVisualizer.config.key(action_name)
+          action = GIFIoT.config.key(action_name)
           unless CurrentMember.where(:user => user).empty?
             @@clients.each{ |wss| wss.send({ id: user, action_name: action_name }.to_json) }
             StatusLog.create(:user => user, :action => action)
             CurrentMember.find_by_user(user).update(status: action)
-            MQTTVisualizer.post_update({:user => user, :action => action})
-            MQTTVisualizer.log_sojourn_time(user, action) # if action == :out
+            GIFIoT.post_update({:user => user, :action => action})
+            GIFIoT.log_sojourn_time(user, action) # if action == :out
           end
         end
 
