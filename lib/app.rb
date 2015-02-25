@@ -3,6 +3,7 @@
   faye/websocket
   haml
   influxdb
+  ipaddress
   json
   open-uri
   mqtt

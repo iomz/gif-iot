@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "faye-websocket"
   spec.add_dependency "haml"
   spec.add_dependency "influxdb"
+  spec.add_dependency "ipaddress"
   spec.add_dependency "json"
   spec.add_dependency "mqtt"
   spec.add_dependency "puma"

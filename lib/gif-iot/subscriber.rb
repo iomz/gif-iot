@@ -7,26 +7,17 @@ module GIFIoT
           c.get('gif-iot/#') do |topic,message|
             topics = topic.split('/')
             case topics[1]
-            when 'ip' # when ip info received
+            when 'status' # when status info received
               data = JSON.parse(message)
-              ip = data["ip"]
               device_mac = data["deviceMac"]
               sensor_mac = data["sensorMac"] || ""
+              ip = (IPAddress.valid? data["ip"]) ? data["ip"] : ""
               status = data["nodeStatus"]
-              # TODO: rewrite when blank
-              #ActiveNode.find_or_create_by(:device_mac => device_mac, :ip => ip, :sensor_mac => sensor_mac)
-              node = ActiveNode.where(:device_mac => device_mac)
-              if node.blank? # the device is new to the gif-iot
-                node = ActiveNode.create(
-                  :device_mac => device_mac, :ip => ip, :sensor_mac => sensor_mac
-                )
-                node_hash = node.serializable_hash(:except => 'created_at')
-              else # if the device is already known to gif-iot
-                node = node.take
-                node.touch();
-                node.update(ip: ip, sensor_mac: sensor_mac)
-                node_hash = node.serializable_hash(:except => 'created_at')
-              end
+              # update device info in ActiveNode, create if not exist
+              node = ActiveNode.find_or_create_by(:device_mac => device_mac)
+              node.update(ip: ip, sensor_mac: sensor_mac)
+              node_hash = node.serializable_hash(:except => 'created_at')
+              # tell browsers to update new info
               WebsocketHandler.broadcast({ topic: 'node', node: node_hash })
               if !status.nil? # if the message contains status info
                 node_hash = {id: node.id, status: status}
@@ -36,12 +27,16 @@ module GIFIoT
               data = JSON.parse(message)
               device_mac = data["deviceMac"]
               node = ActiveNode.where(:device_mac => device_mac)
-              if node.any? # if the data is from a known sensor
+              if node.any? # if the data is from a known device
                 node = node.take
                 node.touch()
-                node_hash = node.serializable_hash(:only => ['id', 'updated_at'])
+                node_hash = node.serializable_hash(:only => ['id', 'sensor_mac', 'updated_at'])
+                node_hash[:status] = 'active'
                 WebsocketHandler.broadcast({ topic: 'node', node: node_hash })
-                data.delete("ip").delete("sensorMac").delete("deviceMac")
+                # trim irrelevant attributes to ingest Influxdb
+                data.delete("ip")
+                data.delete("sensorMac")
+                data.delete("deviceMac")
                 InfluxdbClient.ingest("gif"+node_hash['id'].to_s, data)
               elsif topics.length == 3 # if the data is from somewhere
                 InfluxdbClient.ingest(topics[2], data)

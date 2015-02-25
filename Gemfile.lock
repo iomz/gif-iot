@@ -6,6 +6,7 @@ PATH
       faye-websocket
       haml
       influxdb
+      ipaddress
       json
       mqtt
       puma
@@ -47,6 +48,7 @@ GEM
     i18n (0.7.0)
     influxdb (0.1.8)
       json
+    ipaddress (0.8.0)
     json (1.8.2)
     minitest (5.5.1)
     mqtt (0.3.1)
