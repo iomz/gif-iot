@@ -42,7 +42,7 @@ module GIFIoT
                 node_hash = node.serializable_hash(:only => ['id', 'updated_at'])
                 WebsocketHandler.broadcast({ topic: 'node', node: node_hash })
                 data.delete("ip").delete("sensorMac").delete("deviceMac")
-                InfluxdbClient.ingest("gif-iot-"+node_hash['id'].to_s, data)
+                InfluxdbClient.ingest("gif"+node_hash['id'].to_s, data)
               elsif topics.length == 3 # if the data is from somewhere
                 InfluxdbClient.ingest(topics[2], data)
               end

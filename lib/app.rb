@@ -51,6 +51,10 @@ module GIFIoT
       end
       ip
     end
+
+    get '/xml/:name' do
+      InfluxdbClient.query_to_xml(params[:name])
+    end
   end
 end
 
