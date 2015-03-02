@@ -16,12 +16,12 @@ h1 {
     background-color: #00ff00;
 }
 
-.initializing {
+.initialized, .initializing {
     color: #ffffff;
     background-color: #0099FF;
 }
 
-.pending {
+.discovering {
     color: #ffffff;
     background-color: #ff8c00;
 }

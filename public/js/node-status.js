@@ -44,7 +44,11 @@ var animateUpdate = function(node) {
             changeNodeStatus(node["id"], node["status"]);
             break;
 
-          case "pending":
+          case "discovering":
+            changeNodeStatus(node["id"], node["status"]);
+            break;
+
+          case "initialized":
             changeNodeStatus(node["id"], node["status"]);
             break;
 
