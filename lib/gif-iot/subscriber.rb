@@ -11,7 +11,8 @@ module GIFIoT
               data = JSON.parse(message)
               device_mac = data["deviceMac"]
               sensor_mac = data["sensorMac"] || ""
-              ip = (IPAddress.valid? data["ip"]) ? data["ip"] : ""
+              #ip = (IPAddress.valid? data["ip"]) ? data["ip"] : ""
+              ip = data["ip"] || ""
               status = data["nodeStatus"]
               # update device info in ActiveNode, create if not exist
               node = ActiveNode.find_or_create_by(:device_mac => device_mac)

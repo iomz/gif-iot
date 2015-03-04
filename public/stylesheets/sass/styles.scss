@@ -31,6 +31,11 @@ h1 {
     background-color: #800000;
 }
 
+.pending {
+    color: #ffffff;
+    background-color: #ff66ff;
+}
+
 .not-active {
    pointer-events: none;
    cursor: default;

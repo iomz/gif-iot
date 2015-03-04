@@ -59,6 +59,10 @@ var animateUpdate = function(node) {
           case "active":
             changeNodeStatus(node["id"], node["status"]);
             break;
+
+          case "pending":
+            changeNodeStatus(node["id"], node["status"]);
+            break;
         }
     } 
     /* update the rest of node info attr */
